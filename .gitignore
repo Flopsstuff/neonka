@@ -1,0 +1,27 @@
+# Build
+.pio/
+build/
+*.elf
+*.hex
+*.bin
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# PlatformIO
+.pioenvs/
+.piolibdeps/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Secrets
+.env
