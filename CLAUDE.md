@@ -20,6 +20,21 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `docs/` — Wheelwriter protocol documentation
 - `hardware/` — Wiring diagrams, pinouts
 
+## Build & Development
+
+PlatformIO in a project-local venv (`.venv/`). No activation needed — scripts call `.venv/bin/pio` directly.
+
+```bash
+./scripts/setup.sh    # Create venv, install PlatformIO (one-time)
+./scripts/build.sh    # Compile firmware
+./scripts/upload.sh   # Upload to Teensy (must be connected)
+./scripts/monitor.sh  # Serial monitor at 115200 baud
+```
+
+First build downloads ~200MB ARM toolchain — this is normal.
+
+First upload requires pressing the Teensy button physically; subsequent uploads auto-reboot via USB. Serial port appears as `/dev/cu.usbmodemXXXXXX` on macOS.
+
 ## Language
 
 Project documentation (README) is written in Russian.
