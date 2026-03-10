@@ -51,8 +51,7 @@ Main commands:
 ```bash
 ./scripts/build.sh             # Build firmware
 ./scripts/upload.sh            # Upload to Teensy (automatic reboot)
-./scripts/monitor.sh           # Serial monitor (interactive)
-./scripts/read-serial.sh [sec] # Read serial (non-interactive, default 5 sec)
+./scripts/serial.sh [sec]      # Serial reader with auto-reconnect (default 5 sec)
 ./scripts/compiledb.sh         # Generate compile_commands.json for IDE
 ```
 
@@ -77,7 +76,7 @@ If the IDE shows no autocomplete or reports `Arduino.h file not found`, regenera
 
 ## Status
 
-Early development. Current firmware — blink + REBOOT command over serial for programmatic reflashing.
+Early development. Current firmware monitors pins 6-9 (INPUT_PULLUP) and reports state changes over serial.
 
 ## Links
 

@@ -38,7 +38,7 @@
     {
       "label": "Monitor serial",
       "type": "shell",
-      "command": "${workspaceFolder}/scripts/monitor.sh",
+      "command": "${workspaceFolder}/scripts/serial.sh 0",
       "problemMatcher": []
     }
   ]

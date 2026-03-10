@@ -33,7 +33,7 @@
       "name": "Monitor serial",
       "type": "node-terminal",
       "request": "launch",
-      "command": "${workspaceFolder}/scripts/monitor.sh",
+      "command": "${workspaceFolder}/scripts/serial.sh 0",
       "cwd": "${workspaceFolder}"
     }
   ]

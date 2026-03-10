@@ -17,7 +17,7 @@ Build the firmware, upload it to the Teensy 4.0, and verify it's running.
    - The script sends a `REBOOT` command over serial to enter the bootloader automatically.
    - If upload fails with a timeout or "unable to open" error, suggest the user press the physical button on the Teensy and then re-run upload.
 
-3. **Verify** — run `./scripts/read-serial.sh 5` to capture 5 seconds of serial output
+3. **Verify** — run `./scripts/serial.sh 5` to capture 5 seconds of serial output
    - Show the output to confirm the firmware is running.
    - If there's no output, note that the Teensy may not be printing anything — this isn't necessarily an error.
 

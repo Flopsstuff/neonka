@@ -32,8 +32,7 @@ PlatformIO in a project-local venv (`.venv/`). No activation needed — scripts 
 ./scripts/setup.sh       # Create venv, install PlatformIO (one-time)
 ./scripts/build.sh       # Compile firmware
 ./scripts/upload.sh      # Upload to Teensy (sends REBOOT, no button needed)
-./scripts/monitor.sh     # Interactive serial monitor (requires terminal)
-./scripts/read-serial.sh [seconds] [port]  # Non-interactive serial reader
+./scripts/serial.sh [seconds] [port]  # Serial reader with auto-reconnect (default 5s)
 ```
 
 First build downloads ~200MB ARM toolchain — this is normal.
