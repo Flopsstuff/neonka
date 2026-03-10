@@ -1,7 +1,7 @@
 #include <Arduino.h>
 
 const int LED_PIN = 13;
-const unsigned long BLINK_INTERVAL = 1000;
+const unsigned long BLINK_INTERVAL = 100;
 
 static String serialBuf;
 

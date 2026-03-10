@@ -1,0 +1,45 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build + Upload firmware",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "Build firmware",
+        "Upload firmware"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Build firmware",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/build.sh",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Upload firmware",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/upload.sh",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Generate compile_commands.json",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/compiledb.sh",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Monitor serial",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/monitor.sh",
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,44 +1,85 @@
 # TKB — Teensy Keyboard Bridge for IBM Wheelwriter 6
 
-Подключение к IBM Wheelwriter 6 через **Option Interface** порт с помощью Teensy 4.0.
+Interfacing with an IBM Wheelwriter 6 via its **Option Interface** port using a Teensy 4.0.
 
-## Цель проекта
+## Goal
 
-Превратить IBM Wheelwriter 6 в управляемый принтер/терминал — отправлять текст на печать с компьютера и (в перспективе) читать нажатия клавиш машинки.
+Turn the IBM Wheelwriter 6 into a computer-controlled printer/terminal — send text to print from a computer, and eventually read keystrokes from the typewriter.
 
-## Оборудование
+## Hardware
 
-| Компонент | Описание |
+| Component | Description |
 |---|---|
-| IBM Wheelwriter 6 | Электронная печатная машинка с дейзи-колесом |
-| Teensy 4.0 | Микроконтроллер (ARM Cortex-M7, 600 МГц), S/N 19175250 |
-| Кабель/адаптер | Подключение к Option Interface разъёму на задней панели машинки |
+| IBM Wheelwriter 6 | Electronic daisy wheel typewriter |
+| Teensy 4.0 | Microcontroller (ARM Cortex-M7, 600 MHz), S/N 19175250 |
+| Cable/adapter | Connection to the Option Interface port on the back of the typewriter |
 
 ## Option Interface
 
-IBM Wheelwriter 6 имеет на задней панели разъём **Option Interface** — проприетарный последовательный интерфейс (internal bus), по которому клавиатура общается с механизмом печати. Протокол использует:
+The IBM Wheelwriter 6 has an **Option Interface** connector on the back panel — a proprietary serial interface (internal bus) used for communication between the keyboard and the print mechanism. The protocol uses:
 
-- **Сигнал:** последовательная передача данных, ~187.5 kbaud (инвертированный, open-collector)
-- **Линии:** Bus (данные), +5V, GND
-- **Формат команд:** пакеты по 3 байта (команда + параметры)
-- **Логические уровни:** 5V (Teensy 4.0 — 3.3V, нужен level shifter или резистивный делитель)
+- **Signal:** serial data, ~187.5 kbaud (inverted, open-collector)
+- **Lines:** Bus (data), +5V, GND
+- **Command format:** 3-byte packets (command + parameters)
+- **Logic levels:** 5V (Teensy 4.0 is 3.3V — level shifter or resistor divider required)
 
-## Структура проекта
+See [docs/wheelwriter-bus-protocol.md](docs/wheelwriter-bus-protocol.md) for details.
+
+## Project Structure
 
 ```
-tkb/
-├── README.md
-├── firmware/          # Прошивка Teensy (Arduino/PlatformIO)
-├── host/              # Утилиты на стороне компьютера
-├── docs/              # Документация по протоколу Wheelwriter
-└── hardware/          # Схемы подключения, распиновка
+neonka/
+├── firmware/             # Teensy firmware (Arduino/PlatformIO)
+│   ├── src/main.cpp      # Main source file
+│   └── platformio.ini    # PlatformIO configuration
+├── scripts/              # Build and utility scripts
+├── docs/                 # Wheelwriter protocol documentation
+├── ref/                  # Reference projects (IBM_Wheelwriter_Teletype)
+└── .vscode/              # IDE configuration (tasks, launch, settings)
 ```
 
-## Статус
+## Development
 
-В начале разработки.
+Set up the environment:
 
-## Ссылки
+```bash
+./scripts/setup.sh
+```
+
+Main commands:
+
+```bash
+./scripts/build.sh             # Build firmware
+./scripts/upload.sh            # Upload to Teensy (automatic reboot)
+./scripts/monitor.sh           # Serial monitor (interactive)
+./scripts/read-serial.sh [sec] # Read serial (non-interactive, default 5 sec)
+./scripts/compiledb.sh         # Generate compile_commands.json for IDE
+```
+
+Cursor/VSCode tasks:
+
+```text
+Tasks / Run and Debug:
+- Build firmware
+- Upload firmware
+- Build + Upload firmware
+- Monitor serial
+- Generate compile_commands.json
+```
+
+The default build task in the IDE is set to `Build + Upload firmware`.
+
+If the IDE shows no autocomplete or reports `Arduino.h file not found`, regenerate the compilation database:
+
+```bash
+./scripts/compiledb.sh
+```
+
+## Status
+
+Early development. Current firmware — blink + REBOOT command over serial for programmatic reflashing.
+
+## Links
 
 - [PJRC Teensy 4.0](https://www.pjrc.com/store/teensy40.html)
 - [Wheelwriter bus protocol (Beihl)](http://www.interlockroc.org/2012/07/02/wheelwriter-speak/)

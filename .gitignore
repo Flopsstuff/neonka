@@ -6,7 +6,10 @@ build/
 *.bin
 
 # IDE / Editor
-.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
 .idea/
 *.swp
 *.swo
@@ -28,3 +31,7 @@ ref/
 
 # Secrets
 .env
+
+# PlatformIO cache
+firmware/.cache/
+firmware/compile_commands.json

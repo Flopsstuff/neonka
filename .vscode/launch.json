@@ -1,0 +1,40 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Build + Upload firmware",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "${workspaceFolder}/scripts/build.sh && ${workspaceFolder}/scripts/upload.sh",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Build firmware",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "${workspaceFolder}/scripts/build.sh",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Upload firmware",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "${workspaceFolder}/scripts/upload.sh",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Generate compile_commands.json",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "${workspaceFolder}/scripts/compiledb.sh",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Monitor serial",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "${workspaceFolder}/scripts/monitor.sh",
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}

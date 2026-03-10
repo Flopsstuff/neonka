@@ -47,4 +47,4 @@ Firmware listens for `REBOOT` command on serial to enter bootloader programmatic
 
 ## Language
 
-Project documentation (README) is written in Russian.
+Project documentation (README) is written in English.
