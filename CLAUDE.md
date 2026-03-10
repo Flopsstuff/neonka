@@ -11,6 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Typewriter:** IBM Wheelwriter 6 (daisy wheel, proprietary serial bus)
 - **Microcontroller:** Teensy 4.0 (ARM Cortex-M7, 600 MHz, 3.3V logic)
 - **Protocol:** ~187.5 kbaud inverted open-collector serial, 3-byte command packets
+- **Level shifter:** 4-channel bidirectional on pins 6-9; Serial2 (TX=8, RX=7) for Wheelwriter bus
 - **Level shifting required:** Wheelwriter bus is 5V, Teensy is 3.3V
 
 ## Project Structure

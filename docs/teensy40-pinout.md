@@ -1,3 +1,9 @@
+---
+layout: default
+title: Teensy 4.0 Pinout
+nav_order: 3
+---
+
 # Teensy 4.0 Pinout Reference
 
 Source: [PJRC Teensy 4.0](https://www.pjrc.com/store/teensy40.html), [pinout card PDF](https://www.pjrc.com/teensy/card11a_rev4_web.pdf)
@@ -66,7 +72,7 @@ All 7 ports support arbitrary baud rates and hardware FIFO (4 bytes TX + RX).
 
 | Port | TX Pin | RX Pin | Alt TX | Alt RX | Notes |
 |------|--------|--------|--------|--------|-------|
-| Serial1 | 1 | 0 | - | - | **Best choice for Wheelwriter** |
+| Serial1 | 1 | 0 | - | - | |
 | Serial2 | 8 | 7 | - | - | |
 | Serial3 | 14 | 15 | - | - | |
 | Serial4 | 17 | 16 | - | - | |
@@ -117,23 +123,7 @@ Note: CAN requires external transceiver.
 | On/Off | Control power state |
 | Program | Press to enter bootloader |
 
-## Pin Mapping for Wheelwriter Project
+## Notes
 
-For connecting to Wheelwriter Option Interface (BUS pin):
-
-```
-Teensy 4.0          Level Shifter         Wheelwriter
-                     (3.3V <-> 5V)        Option Interface
-Pin 1 (TX) -------> TX_3V3  TX_5V ------> BUS (pin 5)
-Pin 0 (RX) <------- RX_3V3  RX_5V <------ BUS (pin 5)
-3.3V -------->       LV
-GND  -------->       GND     GND  <------ GND (pin 3,4)
-                              HV  <------ +5V (pin 1,2)
-```
-
-**Critical:** Teensy 4.0 is NOT 5V tolerant. Level shifter is mandatory.
-
-Serial1 config:
-```cpp
-Serial1.begin(187500, SERIAL_9N1);
-```
+- **3.3V logic only** — pins are NOT 5V tolerant. Level shifter required for 5V devices.
+- Max recommended output current per pin: 4 mA.

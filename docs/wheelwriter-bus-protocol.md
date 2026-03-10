@@ -1,3 +1,9 @@
+---
+layout: default
+title: Wheelwriter Bus Protocol
+nav_order: 2
+---
+
 # IBM Wheelwriter Bus Protocol
 
 Reverse-engineered from two independent projects:
@@ -597,7 +603,7 @@ Both reference projects confirm the Option Interface port uses the same bus prot
 ### Teensy UART Configuration
 
 ```cpp
-Serial1.begin(187500, SERIAL_9N1);  // 9 data bits, no parity, 1 stop bit
+Serial2.begin(187500, SERIAL_9N1);  // 9 data bits, no parity, 1 stop bit (TX=pin 8, RX=pin 7)
 ```
 
 The 9th bit distinguishes address words (bit8=1, e.g., `0x121`) from data/ACK words (bit8=0).

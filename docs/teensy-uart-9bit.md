@@ -1,3 +1,9 @@
+---
+layout: default
+title: Teensy 9-bit UART
+nav_order: 4
+---
+
 # Teensy 9-bit UART for Wheelwriter Bus
 
 Notes from [PJRC forum thread](https://forum.pjrc.com/index.php?threads/9-bit-uart-with-non-standard-baud-on-a-teensy-3-5.55790/) and reference projects.
@@ -5,7 +11,7 @@ Notes from [PJRC forum thread](https://forum.pjrc.com/index.php?threads/9-bit-ua
 ## Basic Configuration
 
 ```cpp
-Serial1.begin(187500, SERIAL_9N1);  // 9 data bits, no parity, 1 stop bit
+Serial2.begin(187500, SERIAL_9N1);  // 9 data bits, no parity, 1 stop bit
 ```
 
 - Paul Stoffregen confirmed: all Teensy serial ports support arbitrary baud rates
@@ -22,8 +28,8 @@ On Teensy 3.x, must uncomment in `HardwareSerial.h`:
 On Teensy 4.0 (LPUART / i.MX RT1062) -- needs verification whether this define is required or enabled by default.
 
 With 9-bit mode enabled:
-- `Serial1.write(0x121)` sends 9-bit word (bit8=1, byte=0x21) -- address byte
-- `Serial1.write(0x003)` sends 9-bit word (bit8=0, byte=0x03) -- data byte
+- `Serial2.write(0x121)` sends 9-bit word (bit8=1, byte=0x21) -- address byte
+- `Serial2.write(0x003)` sends 9-bit word (bit8=0, byte=0x03) -- data byte
 - Read returns `uint16_t` with 9th bit in bit 8
 
 ## Half-Duplex (Shared Bus)
@@ -58,7 +64,7 @@ UART0_C3 &= ~UART_C3_TXDIR;
 Teensy 4.0 LPUART supports single-wire half-duplex natively via LPUART CTRL register:
 - `CTRL[LOOPS]` = 1, `CTRL[RSRC]` = 1 for single-wire mode
 - `CTRL[TXDIR]` to switch direction
-- Registers: `LPUART6_CTRL` (for Serial1), etc.
+- Registers: `LPUART4_CTRL` (for Serial2), etc.
 
 **TODO:** Verify exact register addresses and test on Teensy 4.0.
 
@@ -70,9 +76,9 @@ The bus is idle-HIGH, open-collector. If driving through MOSFET:
 
 Teensy 4.0 LPUART has built-in inversion:
 ```cpp
-Serial1.begin(187500, SERIAL_9N1_TXINV);  // invert TX only
+Serial2.begin(187500, SERIAL_9N1_TXINV);  // invert TX only
 // or
-Serial1.begin(187500, SERIAL_9N1_RXINV_TXINV);  // invert both
+Serial2.begin(187500, SERIAL_9N1_RXINV_TXINV);  // invert both
 ```
 
 Whether to use `TXINV`, `RXINV`, or neither depends on the hardware interface circuit.
@@ -81,9 +87,9 @@ Whether to use `TXINV`, `RXINV`, or neither depends on the hardware interface ci
 
 | Register | Purpose |
 |----------|---------|
-| `LPUART6_CTRL` | Control (LOOPS, RSRC, TXDIR, M=9-bit, etc.) |
-| `LPUART6_STAT` | Status |
-| `LPUART6_DATA` | Data (bits 0-8 for 9-bit mode, bit 8 = 9th bit) |
-| `LPUART6_BAUD` | Baud rate |
+| `LPUART4_CTRL` | Control (LOOPS, RSRC, TXDIR, M=9-bit, etc.) |
+| `LPUART4_STAT` | Status |
+| `LPUART4_DATA` | Data (bits 0-8 for 9-bit mode, bit 8 = 9th bit) |
+| `LPUART4_BAUD` | Baud rate |
 
-Serial1 = LPUART6, Serial2 = LPUART4, etc. (mapping varies, check Teensy 4.0 schematic).
+Serial1 = LPUART6, **Serial2 = LPUART4** (used for Wheelwriter), etc.

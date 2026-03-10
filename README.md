@@ -78,6 +78,10 @@ If the IDE shows no autocomplete or reports `Arduino.h file not found`, regenera
 
 Early development. Current firmware monitors pins 6-9 (INPUT_PULLUP) and reports state changes over serial.
 
+## Documentation
+
+Full project documentation: **[flopsstuff.github.io/neonka](https://flopsstuff.github.io/neonka/)**
+
 ## Links
 
 - [PJRC Teensy 4.0](https://www.pjrc.com/store/teensy40.html)
