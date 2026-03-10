@@ -20,12 +20,13 @@ Serial2.begin(187500, SERIAL_9N1);  // 9 data bits, no parity, 1 stop bit
 
 ## 9-bit Support
 
-On Teensy 3.x, must uncomment in `HardwareSerial.h`:
-```cpp
-#define SERIAL_9BIT_SUPPORT
-```
+Commented out by default in `HardwareSerial.h` on both Teensy 3.x and 4.0.
+Don't edit the core file — define via build flags:
 
-On Teensy 4.0 (LPUART / i.MX RT1062) -- needs verification whether this define is required or enabled by default.
+```ini
+; platformio.ini
+build_flags = -DSERIAL_9BIT_SUPPORT
+```
 
 With 9-bit mode enabled:
 - `Serial2.write(0x121)` sends 9-bit word (bit8=1, byte=0x21) -- address byte
